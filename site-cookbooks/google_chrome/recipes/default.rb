@@ -24,3 +24,5 @@ end
 package "google-chrome-beta"
 execute "update-alternatives --set x-www-browser /usr/bin/google-chrome"
 execute "update-alternatives --set gnome-www-browser /usr/bin/google-chrome"
+
+# TODO make update-alternatives a resource

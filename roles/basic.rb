@@ -5,12 +5,17 @@ run_list("ubuntu",
          "paul",
          "google_chrome",
          "cups_pdf",
-         "flash")
+         "flash",
+         "java_plugin")
 
-#flash
-#java plugin
-#build-essential
-#java_dev
+# java plugin
+# brackup
+# video/audio codecs
+# pidgin?
+# vlc
+# sun virtual box
+# adobe reader?
+# dropbox
 
 # Attributes applied if the node doesn't have it set already.
 #default_attributes()

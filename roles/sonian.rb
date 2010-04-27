@@ -6,10 +6,8 @@ run_list("role[basic]",
          "ruby_dev",
          "clojure_dev")
 
-#flash
-#java plugin
-#build-essential
-#java_dev
+# build-essential
+# skype
 
 # Attributes applied if the node doesn't have it set already.
 #default_attributes()
