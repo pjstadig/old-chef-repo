@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: google_chrome
+# Cookbook Name:: cups_pdf
 # Recipe:: default
 #
 # Copyright 2010, Paul J. Stadig
@@ -17,10 +17,4 @@
 # limitations under the License.
 #
 
-apt_source "google" do
-  key "https://dl-ssl.google.com/linux/linux_signing_key.pub"
-end
-
-package "google-chrome-beta"
-execute "update-alternatives --set x-www-browser /usr/bin/google-chrome"
-execute "update-alternatives --set gnome-www-browser /usr/bin/google-chrome"
+package "cups-pdf"

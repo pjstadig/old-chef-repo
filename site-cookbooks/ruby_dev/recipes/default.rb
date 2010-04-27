@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: google_chrome
+# Cookbook Name:: ruby_dev
 # Recipe:: default
 #
 # Copyright 2010, Paul J. Stadig
@@ -17,10 +17,22 @@
 # limitations under the License.
 #
 
-apt_source "google" do
-  key "https://dl-ssl.google.com/linux/linux_signing_key.pub"
+include_recipe "git"
+include_recipe "emacs"
+include_recipe "ruby"
+include_recipe "rubygems"
+
+package "ruby-full"
+
+gem_package "rails" do
+  version "2.3.5"
 end
 
-package "google-chrome-beta"
-execute "update-alternatives --set x-www-browser /usr/bin/google-chrome"
-execute "update-alternatives --set gnome-www-browser /usr/bin/google-chrome"
+gem_package "ruby-debug"
+
+# TODO install rails
+# TODO install ruby-debug
+# TODO install rvm
+# TODO install rubinius
+# TODO install ruby 1.9
+# TODO install jruby

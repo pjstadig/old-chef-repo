@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: google_chrome
+# Cookbook Name:: clojure_dev
 # Recipe:: default
 #
 # Copyright 2010, Paul J. Stadig
@@ -17,10 +17,12 @@
 # limitations under the License.
 #
 
-apt_source "google" do
-  key "https://dl-ssl.google.com/linux/linux_signing_key.pub"
-end
+include_recipe "java"
+include_recipe "emacs"
 
-package "google-chrome-beta"
-execute "update-alternatives --set x-www-browser /usr/bin/google-chrome"
-execute "update-alternatives --set gnome-www-browser /usr/bin/google-chrome"
+# TODO Setup clojure
+## download clojure
+## download clojure-contrib
+## setup clojure script
+## setup lein
+## setup clojars

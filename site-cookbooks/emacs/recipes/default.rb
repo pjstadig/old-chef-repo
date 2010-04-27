@@ -1,7 +1,8 @@
 #
-# Cookbook Name:: google_chrome
+# Cookbook Name:: emacs
 # Recipe:: default
 #
+# Copyright 2009, Opscode, Inc.
 # Copyright 2010, Paul J. Stadig
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,10 +18,18 @@
 # limitations under the License.
 #
 
-apt_source "google" do
-  key "https://dl-ssl.google.com/linux/linux_signing_key.pub"
+#include_recipe "paul"
+#include_recipe "git"
+
+package "emacs"
+
+execute "update-alternatives --set editor /usr/bin/emacs23"
+
+remote_file "/etc/profile.d/emacs.sh" do
+  source "emacs.sh"
+  owner "root"
+  group "root"
+  mode 0644
 end
 
-package "google-chrome-beta"
-execute "update-alternatives --set x-www-browser /usr/bin/google-chrome"
-execute "update-alternatives --set gnome-www-browser /usr/bin/google-chrome"
+#execute("git clone git@github.com:pjstadig/emacs-starter-kit.git /home/paul/.emacs.d")

@@ -1,10 +1,11 @@
-name "sonian_development"
-description "Recipes and attributes for sonian development"
+name "basic"
+description "Basic recipes and attributes"
 # List of recipes and roles to apply. Requires Chef 0.8, earlier versions use 'recipes()'.
-run_list("role[basic]",
-         "java_dev",
-         "ruby_dev",
-         "clojure_dev")
+run_list("ubuntu",
+         "paul",
+         "google_chrome",
+         "cups_pdf",
+         "flash")
 
 #flash
 #java plugin
