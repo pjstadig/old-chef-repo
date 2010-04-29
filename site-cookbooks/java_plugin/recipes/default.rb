@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: paul
+# Cookbook Name:: java_plugin
 # Recipe:: default
 #
 # Copyright 2010, Paul J. Stadig
@@ -17,12 +17,6 @@
 # limitations under the License.
 #
 
-package "libshadow-ruby1.8"
+include_recipe "java"
 
-user "paul" do
-  uid 1001
-  shell "/bin/bash"
-  home "/home/paul"
-  password "$1$4m7DGTI6$TgwQkbBBQFW.JsEO7BKAC."
-  supports :manage_home => true
-end
+package "sun-java6-plugin"

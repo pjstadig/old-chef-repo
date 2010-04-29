@@ -8,6 +8,7 @@ run_list("role[basic]",
 
 # build-essential
 # skype
+# jce export
 
 # Attributes applied if the node doesn't have it set already.
 #default_attributes()

@@ -8,7 +8,6 @@ run_list("ubuntu",
          "flash",
          "java_plugin")
 
-# java plugin
 # brackup
 # video/audio codecs
 # pidgin?
