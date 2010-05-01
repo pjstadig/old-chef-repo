@@ -18,7 +18,6 @@
 # limitations under the License.
 #
 
-#include_recipe "paul"
 #include_recipe "git"
 
 package "emacs"
