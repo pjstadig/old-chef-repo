@@ -1,6 +1,5 @@
 name "sonian_development"
 description "Recipes and attributes for sonian development"
-# List of recipes and roles to apply. Requires Chef 0.8, earlier versions use 'recipes()'.
 run_list("role[basic]",
          "java_dev",
          "ruby_dev",
@@ -9,6 +8,7 @@ run_list("role[basic]",
 # build-essential
 # skype
 # jce export
+# rabbitmq
 
 # Attributes applied if the node doesn't have it set already.
 #default_attributes()
