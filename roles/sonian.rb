@@ -1,8 +1,6 @@
 name "sonian_development"
 description "Recipes and attributes for sonian development"
 run_list("role[basic]",
-         "java_dev",
-         "ruby_dev",
          "clojure_dev")
 
 # build-essential
