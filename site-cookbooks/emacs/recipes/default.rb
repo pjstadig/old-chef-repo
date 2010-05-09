@@ -18,11 +18,11 @@
 # limitations under the License.
 #
 
-#include_recipe "git"
-
 package "emacs"
 
-execute "update-alternatives --set editor /usr/bin/emacs23"
+update_alternative "editor" do
+  value "/usr/bin/emacs23"
+end
 
 remote_file "/etc/profile.d/emacs.sh" do
   source "emacs.sh"
@@ -30,5 +30,3 @@ remote_file "/etc/profile.d/emacs.sh" do
   group "root"
   mode 0644
 end
-
-#execute("git clone git@github.com:pjstadig/emacs-starter-kit.git /home/paul/.emacs.d")
