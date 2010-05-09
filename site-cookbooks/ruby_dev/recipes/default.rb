@@ -23,11 +23,9 @@ include_recipe "ruby"
 include_recipe "rubygems"
 
 package "ruby-full"
-
+gem_package "rake"
 gem_package "ruby-debug"
 
-# TODO install rails
-# TODO install ruby-debug
 # TODO install rvm
 # TODO install rubinius
 # TODO install ruby 1.9
