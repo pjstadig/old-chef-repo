@@ -18,9 +18,17 @@
 #
 
 define :apt_source, :enable => true, :source => nil, :key => nil, :variables => {} do
-  template_source = params[:source] ? params[:source] : "#{params[:name]}.list.erb"
+  execute "install-key-and-update" do
+    command(if params[:key]
+              "wget -q -O - '#{params[:key]}' | sudo apt-key add - && "
+            else
+              ""
+            end + "apt-get update")
+    action :nothing
+  end
+
   template "/etc/apt/sources.list.d/#{params[:name]}.list" do
-    source template_source
+    source params[:source] ? params[:source] : "#{params[:name]}.list.erb"
     owner "root"
     group "root"
     mode 0644
@@ -30,11 +38,6 @@ define :apt_source, :enable => true, :source => nil, :key => nil, :variables => 
     else
       action :delete
     end
+    notifies :run, resources(:execute => "install-key-and-update"), :immediately
   end
-
-  execute(if params[:key]
-            "wget -q -O - '#{params[:key]}' | sudo apt-key add - && "
-          else
-            ""
-          end + "sudo apt-get update")
 end
