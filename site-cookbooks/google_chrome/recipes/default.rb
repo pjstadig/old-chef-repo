@@ -22,7 +22,12 @@ apt_source "google" do
 end
 
 package "google-chrome-beta"
-execute "update-alternatives --set x-www-browser /usr/bin/google-chrome"
-execute "update-alternatives --set gnome-www-browser /usr/bin/google-chrome"
+execute "update-alternatives --set x-www-browser /usr/bin/google-chrome" do
+  not_if "update-alternatives --query x-www-browser |grep -q \"Value: /usr/bin/google-chrome\""
+end
+
+execute "update-alternatives --set gnome-www-browser /usr/bin/google-chrome" do
+  not_if "update-alternatives --query gnome-www-browser |grep -q \"Value: /usr/bin/google-chrome\""
+end
 
 # TODO make update-alternatives a resource
