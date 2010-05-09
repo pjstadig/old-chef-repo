@@ -5,6 +5,7 @@ run_list("ubuntu",
          "google_chrome",
          "cups_pdf",
          "flash",
+         "keybox",
          "java_plugin")
 
 # brackup
