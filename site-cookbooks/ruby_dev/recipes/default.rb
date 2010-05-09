@@ -24,10 +24,6 @@ include_recipe "rubygems"
 
 package "ruby-full"
 
-gem_package "rails" do
-  version "2.3.5"
-end
-
 gem_package "ruby-debug"
 
 # TODO install rails
