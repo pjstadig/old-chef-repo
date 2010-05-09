@@ -31,4 +31,5 @@ execute "extract-gobi-loader" do
     make install &&
     mkdir -p /lib/firmware/gobi
   ENDL
+  not_if "test -e /lib/udev/gobi_loader"
 end

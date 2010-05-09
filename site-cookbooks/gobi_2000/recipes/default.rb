@@ -17,15 +17,16 @@
 # limitations under the License.
 #
 
-package "linux-source"
 package "patch"
+package "linux-source"
 
 kernel_version = node.kernel.release.split("-").first
 linux_source = "linux-source-#{kernel_version}"
 base_dir = "/usr/src/#{linux_source}"
 
-execute "extract-linux-source" do
+execute("extract-linux-source") do
   command "cd /usr/src && tar xjf #{linux_source}.tar.bz2"
+  not_if "test -d #{base_dir}"
 end
 
 patch_file = "usb-wwan-#{kernel_version}.diff"
@@ -34,7 +35,7 @@ remote_file "#{base_dir}/#{patch_file}" do
 end
 
 build_dir = "/tmp/gobi-build-#{kernel_version}"
-execute "patch-source" do
+execute "patch-and-build" do
   command <<-ENDL
     mkdir #{build_dir}
     cd #{base_dir} &&
@@ -52,12 +53,26 @@ execute "patch-source" do
     cp #{build_dir}/drivers/usb/serial/usb_wwan.ko /lib/modules/#{node.kernel.release}/kernel/drivers/usb/serial/ &&
     cp #{build_dir}/drivers/usb/serial/qcserial.ko /lib/modules/#{node.kernel.release}/kernel/drivers/usb/serial/ &&
     cp #{build_dir}/drivers/usb/serial/option.ko /lib/modules/#{node.kernel.release}/kernel/drivers/usb/serial/ &&
-    /sbin/depmod -a &&
-
-    (rmmod qcserial ||
-    modprobe qcserial)
+    /sbin/depmod -a
   ENDL
+  not_if "test /lib/modules/#{node.kernel.release}/kernel/drivers/usb/serial/qcserial.ko -nt " +
+    "/lib/modules/#{node.kernel.release}/kernel/drivers/usb/serial/safe_serial.ko"
 end
-# add module to boot
 
 include_recipe "gobi_loader"
+
+remote_file "/tmp/gobi_2000.tar.gz.gpg" do
+  source "gobi_2000.tar.gz.gpg"
+end
+
+execute "install-firmware" do
+  command <<-END
+    cd /lib/firmware/gobi/ && gpg -d /tmp/gobi_2000.tar.gz.gpg | tar xz &&
+    if lsmod | grep -q qcserial; then
+      rmmod qcserial
+    fi &&
+
+    modprobe qcserial
+  END
+  not_if "test -e /lib/firmware/gobi/UQCN.mbn"
+end
