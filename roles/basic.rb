@@ -6,7 +6,8 @@ run_list("ubuntu",
          "cups_pdf",
          "flash",
          "keybox",
-         "java_plugin")
+         "java_plugin",
+         "codecs")
 
 # brackup
 # video/audio codecs
