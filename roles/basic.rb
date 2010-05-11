@@ -9,13 +9,15 @@ run_list("ubuntu",
          "java_plugin",
          "codecs")
 
-# brackup
-# video/audio codecs
-# pidgin?
-# vlc
-# sun virtual box
-# adobe reader?
+# gpg-agent
+# brother printer drivers
+# brother scanner drivers
 # dropbox
+# sun virtual box
+# brackup
+# vlc
+# pidgin?
+# adobe reader?
 
 # Attributes applied if the node doesn't have it set already.
 #default_attributes()
