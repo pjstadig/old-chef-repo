@@ -8,9 +8,3 @@ run_list("role[basic]",
 # jce export
 # rabbitmq
 # safe setup
-
-# Attributes applied if the node doesn't have it set already.
-#default_attributes()
-
-# Attributes applied no matter what the node has set already.
-#override_attributes()
