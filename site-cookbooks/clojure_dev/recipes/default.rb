@@ -23,6 +23,8 @@ include_recipe "emacs"
 # TODO Setup clojure
 ## download clojure
 ## download clojure-contrib
+## ELPA clojure-mode
+## ELPA clojure-test-mode
 ## setup clojure script
 ## setup lein
 ## setup clojars

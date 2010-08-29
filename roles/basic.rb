@@ -22,3 +22,4 @@ run_list("ubuntu",
 # there a way to reset the keyboard preferences?
 # change system monospace font to Inconsolata 12
 # set the location for weather info
+# gimp

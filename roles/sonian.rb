@@ -8,3 +8,4 @@ run_list("role[basic]",
 # jce export
 # rabbitmq
 # safe setup
+# riak
