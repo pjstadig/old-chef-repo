@@ -2,3 +2,4 @@
 preseed/
 /.vagrant
 /Vagrantfile
+/site-cookbooks/gobi_2000/files/default/gobi_2000.tar.gz
