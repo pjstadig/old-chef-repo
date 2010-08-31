@@ -1,0 +1,28 @@
+= DESCRIPTION:
+
+Unencrypts and installs an encrypted cookbook file.
+
+= REQUIREMENTS:
+
+Requries gnupg and the decryption key to be available on the target system.
+Also requires either user input for the passphrase, or a gpg-agent running.
+
+= USAGE:
+
+    encrypted_file "gobi_2000.tar.gz" do
+      path "/lib/firmware/gobi/gobi_2000.tar.gz"
+      notifies :run, resources(:execute => "install-firmware"), :immediately
+    end
+
+Options are:
+
+* name (required)
+* action (one of :nothing, :create, or :delete; defaults to :create)
+* source (defaults to name + ".gpg")
+* path (defaults to name)
+* owner
+* group
+* mode
+* notifies
+
+If the action is :delete, both the encrypted and unencrypted files will be deleted.

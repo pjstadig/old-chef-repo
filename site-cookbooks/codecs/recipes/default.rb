@@ -2,7 +2,7 @@
 # Cookbook Name:: codecs
 # Recipe:: default
 #
-# Copyright 2010, Paul J. Stadig
+# Copyright 2010, Paul Stadig
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,13 +21,15 @@ package "gstreamer0.10-ffmpeg"
 package "gstreamer0.10-fluendo-mp3"
 package "gstreamer0.10-plugins-bad"
 
-remote_file "/tmp/codecs.sh.gpg" do
-  source "codecs.sh.gpg"
+execute "install-codecs" do
+  command "/usr/local/bin/codecs.sh"
+  action :nothing
 end
 
-execute "unencrypt-codecs" do
-  command "gpg -o /tmp/codecs.sh /tmp/codecs.sh.gpg && chmod +x /tmp/codecs.sh"
-  not_if "test -e /tmp/codecs.sh"
+encrypted_file "codecs.sh" do
+  path "/usr/local/bin/codecs.sh"
+  owner "paul"
+  group "users"
+  mode 00755
+  notifies :run, resources(:execute => "install-codecs"), :immediately
 end
-
-execute "/tmp/codecs.sh"

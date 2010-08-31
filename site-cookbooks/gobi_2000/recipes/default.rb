@@ -2,7 +2,7 @@
 # Cookbook Name:: gobi_2000
 # Recipe:: default
 #
-# Copyright 2010, Paul J. Stadig
+# Copyright 2010, Paul Stadig
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ execute("extract-linux-source") do
 end
 
 patch_file = "usb-wwan-#{kernel_version}.diff"
-remote_file "#{base_dir}/#{patch_file}" do
+cookbook_file "#{base_dir}/#{patch_file}" do
   source patch_file
 end
 
@@ -61,18 +61,29 @@ end
 
 include_recipe "gobi_loader"
 
-remote_file "/tmp/gobi_2000.tar.gz.gpg" do
-  source "gobi_2000.tar.gz.gpg"
-end
-
 execute "install-firmware" do
+  action :nothing
   command <<-END
-    cd /lib/firmware/gobi/ && gpg -d /tmp/gobi_2000.tar.gz.gpg | tar xz &&
+    tar xzf gobi_2000.tar.gz &&
     if lsmod | grep -q qcserial; then
       rmmod qcserial
     fi &&
 
     modprobe qcserial
   END
-  not_if "test -e /lib/firmware/gobi/UQCN.mbn"
+  cwd "/lib/firmware/gobi"
+end
+
+encrypted_file "gobi_2000.tar.gz" do
+  path "/lib/firmware/gobi/gobi_2000.tar.gz"
+  notifies :run, resources(:execute => "install-firmware"), :immediately
+end
+
+execute "install-firmware" do
+  action :run
+  not_if do
+    File.exists?("/lib/firmware/gobi/amss.mbn") &&
+    File.exists?("/lib/firmware/gobi/apps.mbn") &&
+    File.exists?("/lib/firmware/gobi/UQCN.mbn")
+  end
 end
