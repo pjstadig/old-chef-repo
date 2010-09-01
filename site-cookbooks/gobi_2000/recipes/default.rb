@@ -24,22 +24,31 @@ kernel_version = node.kernel.release.split("-").first
 linux_source = "linux-source-#{kernel_version}"
 base_dir = "/usr/src/#{linux_source}"
 
-execute("extract-linux-source") do
-  command "cd /usr/src && tar xjf #{linux_source}.tar.bz2"
-  not_if "test -d #{base_dir}"
+patch_file = "usb-wwan-#{kernel_version}.diff"
+
+execute "patch-usb-wwan" do
+  action :nothing
+  command "patch -p1 < #{patch_file}"
+  cwd base_dir
 end
 
-patch_file = "usb-wwan-#{kernel_version}.diff"
 cookbook_file "#{base_dir}/#{patch_file}" do
+  action :nothing
   source patch_file
+  notifies :run, resources(:execute => "patch-usb-wwan"), :immediately
+end
+
+execute("extract-linux-source") do
+  command "tar xjf #{linux_source}.tar.bz2"
+  not_if "test -d #{base_dir}"
+  cwd "/usr/src"
+  notifies :create, resources(:cookbook_file => "#{base_dir}/#{patch_file}"), :immediately
 end
 
 build_dir = "/tmp/gobi-build-#{kernel_version}"
-execute "patch-and-build" do
+execute "build-and-install-modules" do
   command <<-ENDL
     mkdir #{build_dir}
-    cd #{base_dir} &&
-    patch -p1 < #{patch_file} &&
     cp /lib/modules/#{node.kernel.release}/build/.config #{build_dir} &&
     cp /lib/modules/#{node.kernel.release}/build/Module.symvers #{build_dir} &&
     cp /lib/modules/#{node.kernel.release}/build/Makefile . &&
@@ -55,6 +64,7 @@ execute "patch-and-build" do
     cp #{build_dir}/drivers/usb/serial/option.ko /lib/modules/#{node.kernel.release}/kernel/drivers/usb/serial/ &&
     /sbin/depmod -a
   ENDL
+  cwd base_dir
   not_if "test /lib/modules/#{node.kernel.release}/kernel/drivers/usb/serial/qcserial.ko -nt " +
     "/lib/modules/#{node.kernel.release}/kernel/drivers/usb/serial/safe_serial.ko"
 end
