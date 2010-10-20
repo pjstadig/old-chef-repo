@@ -1,0 +1,9 @@
+#!/bin/bash
+
+chef_dir=$(readlink -f `dirname $0`)
+json_file="$chef_dir/`hostname -f`.json"
+if [ -r $json_file ]; then
+  /usr/bin/chef-solo -c "$chef_dir/solo.rb" -j "$chef_dir/`hostname -f`.json"
+else
+  echo "'$json_file' not found"
+fi
