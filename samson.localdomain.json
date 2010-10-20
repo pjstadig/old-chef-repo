@@ -3,4 +3,6 @@
                  "devilspie",
                  "virtualbox",
                  "vagrant",
-                 "keybox" ] }
+                 "keybox",
+                 "unclutter",
+                 "emacs" ] }
