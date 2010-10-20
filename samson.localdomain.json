@@ -1,3 +1,6 @@
 { "run_list" : [ "gobi_loader", 
                  "tmux",
-                 "devilspie" ] }
+                 "devilspie",
+                 "virtualbox",
+                 "vagrant",
+                 "keybox" ] }
