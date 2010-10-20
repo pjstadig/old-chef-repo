@@ -17,19 +17,36 @@
 # limitations under the License.
 #
 
-gobi_loader = "gobi_loader-0.5"
-cookbook_file "/tmp/#{gobi_loader}.tar.gz" do
-  source "#{gobi_loader}.tar.gz"
+package "gobi-loader"
+
+directory "/lib/firmware/gobi" do
+  owner "root"
+  group "root"
+  mode "0755"
 end
 
-execute "extract-gobi-loader" do
-  command <<-ENDL
-    cd /tmp &&
-    tar xzf #{gobi_loader}.tar.gz &&
-    cd #{gobi_loader} &&
-    make &&
-    make install &&
-    mkdir -p /lib/firmware/gobi
-  ENDL
-  not_if "test -e /lib/udev/gobi_loader"
+execute "install-firmware" do
+  action :nothing
+  command <<-END
+    tar xzf gobi_2000.tar.gz;
+    if lsmod | grep -q qcserial; then
+      rmmod qcserial
+    fi && modprobe qcserial;
+    /bin/true
+  END
+  cwd "/lib/firmware/gobi"
+end
+
+encrypted_file "gobi_2000.tar.gz" do
+  path "/lib/firmware/gobi/gobi_2000.tar.gz"
+  notifies :run, resources(:execute => "install-firmware"), :immediately
+end
+
+execute "install-firmware" do
+  action :run
+  not_if do
+    File.exists?("/lib/firmware/gobi/amss.mbn") &&
+    File.exists?("/lib/firmware/gobi/apps.mbn") &&
+    File.exists?("/lib/firmware/gobi/UQCN.mbn")
+  end
 end
