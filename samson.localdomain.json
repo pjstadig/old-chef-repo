@@ -5,4 +5,5 @@
                  "vagrant",
                  "keybox",
                  "unclutter",
-                 "emacs" ] }
+                 "emacs",
+                 "conkeror" ] }
