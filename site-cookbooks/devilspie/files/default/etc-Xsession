@@ -1,0 +1,12 @@
+# /etc/X11/Xsession.d/10devilspie
+# This file is sourced by Xsession(5), not executed.
+
+if [ -e /etc/default/devilspie ]
+then
+	. /etc/default/devilspie
+fi
+
+if [ -x /usr/bin/devilspie ] && [ "${START_DEVILSPIE}" = "true" ]
+then
+	/usr/bin/devilspie $EXTRA_OPTS /etc/devilspie.d/*.ds $HOME/.devilspie.d/*.ds &
+fi

@@ -1,0 +1,9 @@
+# /etc/default/devilspie - configuration file for devilspie
+
+# Set this option to 'true' if you want to start devilspie
+# automagically after X has been started for a user.
+# Otherwise, set it to 'false'.
+START_DEVILSPIE="true"
+
+# Options passed to devilspie, see 'man devilspie' for details.
+EXTRA_OPTS="-a"

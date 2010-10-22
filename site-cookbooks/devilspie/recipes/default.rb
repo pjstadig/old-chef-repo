@@ -18,3 +18,18 @@
 #
 
 package "devilspie"
+
+cookbook_file "/etc/default/devilspie" do
+  source "etc-default"
+  owner "root"
+  group "root"
+  mode "0644"
+end
+
+cookbook_file "/etc/X11/Xsession.d/10devilspie" do
+  source "etc-Xsession"
+  owner "root"
+  group "root"
+  mode "0644"
+  backup false
+end
