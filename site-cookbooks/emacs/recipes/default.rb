@@ -30,3 +30,11 @@ remote_file "/etc/profile.d/emacs.sh" do
   group "root"
   mode 0644
 end
+
+git_project "/home/paul/src/org-mode" do
+  user "paul"
+  group "paul"
+  source "git://repo.or.cz/org-mode.git"
+  remote "origin"
+  action :pull
+end
