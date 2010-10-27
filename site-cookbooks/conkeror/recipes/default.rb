@@ -18,6 +18,7 @@
 #
 
 package "conkeror"
+package "conkeror-spawn-process-helper"
 
 update_alternative "x-www-browser" do
   value "/usr/bin/conkeror"
