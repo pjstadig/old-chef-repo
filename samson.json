@@ -1,4 +1,4 @@
-{ "run_list" : [ "gobi_loader", 
+{ "run_list" : [ "gobi_loader",
                  "tmux",
                  "devilspie",
                  "virtualbox",
@@ -9,4 +9,6 @@
                  "conkeror",
                  "dropbox",
                  "skype",
-                 "inconsolata" ] }
+                 "inconsolata",
+                 "keychain" ],
+  "domain" : "localdomain" }
