@@ -11,5 +11,6 @@
                  "skype",
                  "inconsolata",
                  "keychain",
-                 "gpg-agent" ],
+                 "gpg-agent",
+                 "rlwrap" ],
   "domain" : "localdomain" }
