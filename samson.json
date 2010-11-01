@@ -10,5 +10,6 @@
                  "dropbox",
                  "skype",
                  "inconsolata",
-                 "keychain" ],
+                 "keychain",
+                 "gpg-agent" ],
   "domain" : "localdomain" }
