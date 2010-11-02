@@ -22,11 +22,3 @@ apt_source "google" do
 end
 
 package "google-chrome-beta"
-
-update_alternative "x-www-browser" do
-  value "/usr/bin/google-chrome"
-end
-
-update_alternative "gnome-www-browser" do
-  value "/usr/bin/google-chrome"
-end
