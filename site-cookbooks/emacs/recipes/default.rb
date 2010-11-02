@@ -19,7 +19,7 @@
 #
 
 package "emacs"
-package "emacs-goodies"
+package "emacs-goodies-el"
 
 update_alternative "editor" do
   value "/usr/bin/emacs23"
