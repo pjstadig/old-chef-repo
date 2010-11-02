@@ -17,4 +17,4 @@
 # limitations under the License.
 #
 
-package "gpg-agent"
+package "gnupg-agent"
