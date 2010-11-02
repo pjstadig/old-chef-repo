@@ -12,5 +12,6 @@
                  "inconsolata",
                  "keychain",
                  "gpg-agent",
-                 "rlwrap" ],
+                 "rlwrap",
+                 "google_chrome" ],
   "domain" : "localdomain" }
