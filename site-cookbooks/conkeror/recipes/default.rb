@@ -24,7 +24,7 @@ update_alternative "x-www-browser" do
   value "/usr/bin/conkeror"
 end
 
-execute "update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /usr/bin/conkeror 40"
+execute "update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /usr/bin/conkeror 160"
 
 update_alternative "gnome-www-browser" do
   value "/usr/bin/conkeror"
